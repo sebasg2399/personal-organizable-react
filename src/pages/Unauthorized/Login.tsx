@@ -14,7 +14,11 @@ export const Login = () => {
       onSubmit={(inputs) => {
         apifetch
           .post("/login", inputs)
-          .then(({ data }) => setUser(data))
+          .then(({ data }) => {
+            setUser(data)
+            sessionStorage.setItem("user", JSON.stringify(data))
+            window.location.replace("/myboards")
+          })
           .catch((e) => console.log(e.message));
       }}
       to="/register"

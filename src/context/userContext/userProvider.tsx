@@ -1,4 +1,5 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./userContext";
 import { userReducer } from "./userReducer";
 
@@ -29,19 +30,22 @@ export const UserProvider = ({ children }: Props) => {
 
   const setUser = (user: User) => {
     dispatch({ type: "setUser", payload: user });
-    sessionStorage.setItem("user", JSON.stringify(user))
   };
-
+  const LogOut = () => {
+    dispatch({ type: "logout" });
+    sessionStorage.clear();
+    window.location.replace("/login")
+  };
   useEffect(() => {
-    const user = sessionStorage.getItem("user")
-    if(user){
-      console.log(JSON.parse(user))
-      setUser(JSON.parse(user));
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      console.log(user)
+      dispatch({ type: "setUser", payload: JSON.parse(user) });
     }
   }, []);
 
   return (
-    <UserContext.Provider value={{ ...state, setUser }}>
+    <UserContext.Provider value={{ ...state, setUser, LogOut }}>
       {children}
     </UserContext.Provider>
   );

@@ -9,6 +9,10 @@ const GlobalStyles = css`
     box-sizing: border-box;
     font-family: ${typography.primary}
   }
+  a{
+    text-decoration: none;
+    color:black;
+  }
 `;
 
 export const Global = () => <GEmotion styles={GlobalStyles} />;

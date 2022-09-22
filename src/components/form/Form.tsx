@@ -40,7 +40,6 @@ const StyledForm = styled.div`
 
 export const Form = ({ children, subject, to, onSubmit }: Props) => {
   const [inputs, setInputs] = useState({});
-
   const handleChange = (event: any) => {
     const name = event.target.name;
     const value = event.target.value;

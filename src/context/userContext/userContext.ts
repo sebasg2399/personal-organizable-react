@@ -9,6 +9,7 @@ export interface UserContextProps {
 
     //Methods
     setUser: (user: User)=>void
+    LogOut: ()=>void
 
 }
 
