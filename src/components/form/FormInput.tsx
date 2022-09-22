@@ -8,6 +8,7 @@ type Props = {
   icon?: JSX.Element;
   onChange?: (e: any) => void;
   type?: string;
+  defaultValue?: string;
 };
 
 const StyledFormInput = styled.div`
@@ -25,6 +26,7 @@ const StyledFormInput = styled.div`
     color: ${colors.secondary["400"]};
   }
   & .input-container {
+    background-color: white;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -54,14 +56,18 @@ export const FormInput = ({
   placeholder,
   onChange,
   icon,
+  defaultValue = undefined,
   type = "text",
 }: Props) => {
+
+
   return (
     <StyledFormInput>
       {label ? <label>{label}</label> : ""}
       <div className="input-container">
         {icon || ""}
         <input
+          defaultValue={defaultValue}
           type={type}
           placeholder={placeholder}
           name={name}

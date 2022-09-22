@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useReducer } from "react";
 import { UserContext } from "./userContext";
 import { userReducer } from "./userReducer";
 
@@ -23,6 +22,7 @@ export interface User {
   firstName?: string;
   lastName?: string;
   token: string;
+  id: number;
 }
 
 export const UserProvider = ({ children }: Props) => {
@@ -39,7 +39,6 @@ export const UserProvider = ({ children }: Props) => {
   useEffect(() => {
     const user = sessionStorage.getItem("user");
     if (user) {
-      console.log(user)
       dispatch({ type: "setUser", payload: JSON.parse(user) });
     }
   }, []);

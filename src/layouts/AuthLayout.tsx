@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const AuthLayout = styled.div`
+background: #e5e5e5;
   display: flex;
   min-height: 100vh;
   justify-content: center;
