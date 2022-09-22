@@ -8,11 +8,13 @@ interface Props {
   trailingIcon?: any;
   leadingIcon?: any;
   size?: "small" | "large" | "default";
+  type?: "submit" | "button" | "reset";
 }
 interface buttonProps {
   button_style?: "primary" | "secondary" | "subtle";
   text?: string;
   size?: "small" | "large" | "default";
+  type?: string;
 }
 const handleStyles = (props: buttonProps) => {
   let background, padding, fontSize, lineHeight;
@@ -32,17 +34,17 @@ const handleStyles = (props: buttonProps) => {
     case "small":
       padding = "6px 10px";
       fontSize = "12px";
-      lineHeight= "16px";
+      lineHeight = "16px";
       break;
     case "large":
       padding = "12px 24px";
       fontSize = "16px";
-      lineHeight= "24px";
+      lineHeight = "24px";
       break;
     default:
       padding = "8px 16px";
       fontSize = "14px";
-      lineHeight= "20px";
+      lineHeight = "20px";
       break;
   }
   return `
@@ -98,10 +100,12 @@ export const Button = ({
   button_style = "primary",
   leadingIcon,
   trailingIcon,
+  type = "button",
   size = "default",
 }: Props) => {
   return (
     <StyledButton
+      type={type}
       size={size}
       text={text}
       onClick={onClick}
