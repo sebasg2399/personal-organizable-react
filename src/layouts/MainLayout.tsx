@@ -2,11 +2,14 @@ import styled from "@emotion/styled";
 import { typography } from "../assets";
 
 type Props = {
-  children: JSX.Element | JSX.Element[] | string;
+  children: any ;
   title: string;
 };
 
 const StyledMainLayout = styled.main`
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
   background: #e5e5e5;
   width: 100%;
   padding: 3rem 2rem;

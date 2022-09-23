@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { UserContext } from "./userContext";
 import { userReducer } from "./userReducer";
+import { apifetch } from "../../services/apifetch";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -34,12 +35,14 @@ export const UserProvider = ({ children }: Props) => {
   const LogOut = () => {
     dispatch({ type: "logout" });
     sessionStorage.clear();
-    window.location.replace("/login")
+    window.location.replace("/login");
   };
   useEffect(() => {
     const user = sessionStorage.getItem("user");
     if (user) {
       dispatch({ type: "setUser", payload: JSON.parse(user) });
+      apifetch.defaults.headers.common["Authorization"] = `Token token=${JSON.parse(user).token}`;
+      console.log(apifetch.defaults.headers);
     }
   }, []);
 

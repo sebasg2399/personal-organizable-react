@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { BiUserCircle } from "react-icons/bi";
 import { Button, Form, Sidebar } from "../../components";
 import { AppLayout, MainLayout } from "../../layouts";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context";
 import { apifetch } from "../../services/apifetch";
 
