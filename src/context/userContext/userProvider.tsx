@@ -42,7 +42,6 @@ export const UserProvider = ({ children }: Props) => {
     if (user) {
       dispatch({ type: "setUser", payload: JSON.parse(user) });
       apifetch.defaults.headers.common["Authorization"] = `Token token=${JSON.parse(user).token}`;
-      console.log(apifetch.defaults.headers);
     }
   }, []);
 

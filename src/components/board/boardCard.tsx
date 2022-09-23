@@ -1,20 +1,21 @@
 import styled from "@emotion/styled";
 import { colors } from "../../assets";
-import { type Board } from "../../context";
 
 interface Props {
-  board: Board;
+  bgColor: string;
   children?: any;
+  onClick?: (event: any) =>void
 }
 
 const StyledBoardCard = styled.div<Props>`
-  background-color: ${(props) => props.board.color};
+  background-color: ${(props) => props.bgColor};
   width: 190px;
   height: 6rem;
   border-radius: 8px;
   padding: 0.5rem;
   display: flex;
   flex-flow: column;
+  cursor: pointer;
   justify-content: space-between;
 `;
 
@@ -24,10 +25,10 @@ const BoardCardControl = styled.div`
   gap: 0.5rem;
 `;
 
-export const BoardCard = ({ board, children }: Props) => {
+export const BoardCard = ({ onClick, bgColor, children }: Props) => {
   return (
-    <StyledBoardCard board={board}>
-      <div>{board.name}</div>
+    <StyledBoardCard onClick={onClick} bgColor={bgColor}>
+      
       {children}
     </StyledBoardCard>
   );

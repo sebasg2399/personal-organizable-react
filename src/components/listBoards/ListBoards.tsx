@@ -4,7 +4,7 @@ import { Board } from "../../context";
 type Props = {
   boards: Board[];
   children?: any;
-  BoardCardTemplate: any
+  BoardCardTemplate: any;
 };
 
 const StyledBoards = styled.div`
@@ -13,17 +13,13 @@ const StyledBoards = styled.div`
   gap: 2rem 1rem;
 `;
 
-export const ListBoards = ({ boards, BoardCardTemplate , children }: Props) => {
-    console.log(boards)
+export const ListBoards = ({ boards, BoardCardTemplate, children }: Props) => {
   return (
     <StyledBoards>
-      {boards.length > 0 ? (
+      {boards.length > 0 &&
         boards.map((board) => (
-          <BoardCardTemplate key={board.id} board={board} ></BoardCardTemplate>
-        ))
-      ) : (
-        <div>No hay boards</div>
-      )}
+          <BoardCardTemplate key={board.id} board={board}></BoardCardTemplate>
+        ))}
       {children}
     </StyledBoards>
   );

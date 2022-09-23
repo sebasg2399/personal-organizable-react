@@ -34,8 +34,6 @@ export const BoardsProvider = ({ children }: Props) => {
     if (state.boards) {
       board.starred = starred;
       dispatch({ type: "updateBoard" });
-      console.log("first");
-      // console.log([...state.boards, nboard])
     }
   };
   const removeBoard=(board: Board)=>{
@@ -46,13 +44,15 @@ export const BoardsProvider = ({ children }: Props) => {
       dispatch({type: "removeBoard", payload: boards})
     }
   }
+  const addBoard=(board:Board)=>{
+    if(board && state.boards){
+      dispatch({type: "setBoards", payload: [board, ...state.boards]})
+    }
+  }
   const closeHandler = (board: Board, closed: boolean) => {
     if (state.boards) {
       board.closed = closed;
-      console.log(board)
       dispatch({ type: "updateBoard" });
-      // dispatch({type: "closeBoard"})
-      // console.log([...state.boards, nboard])
     }
   };
   useEffect(() => {
@@ -62,7 +62,7 @@ export const BoardsProvider = ({ children }: Props) => {
   }, []);
   return (
     <BoardsContext.Provider
-      value={{ ...state, setBoards, starHandler, closeHandler, removeBoard }}
+      value={{ ...state, setBoards, starHandler, closeHandler, removeBoard, addBoard }}
     >
       {children}
     </BoardsContext.Provider>

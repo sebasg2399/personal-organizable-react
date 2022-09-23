@@ -1,6 +1,6 @@
-import { BoardCard, ListBoards, Sidebar } from "../../components/";
+import { BoardCard, CreateBoard, ListBoards, Sidebar } from "../../components/";
 import { AppLayout, MainLayout } from "../../layouts";
-import { useContext } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import { Board, BoardsContext } from "../../context";
 import { BiTrash } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
@@ -12,7 +12,6 @@ type BoardProps = {
 
 export const Boards = () => {
   const { boards, starHandler, closeHandler } = useContext(BoardsContext);
-
   const simpleBoards = (boards: Board[]) => {
     const noClosed = boards.filter((board) => !board.closed);
     return noClosed.filter((board) => !board.starred);
@@ -24,10 +23,18 @@ export const Boards = () => {
 
   const Template = ({ board }: BoardProps) => {
     return (
-      <BoardCard board={board}>
+      <BoardCard
+        onClick={(e: SyntheticEvent) => {
+          e.stopPropagation();
+          console.log("asd");
+        }}
+        bgColor={board.color}
+      >
+        <p>{board.name}</p>
         <BoardCard.Control>
           <BoardCard.IconWrapper
-            onClick={() => {
+            onClick={(e: SyntheticEvent) => {
+              e.stopPropagation();
               closeHandler(board, true);
               apifetch.patch(`/boards/${board.id}`, {
                 closed: true,
@@ -37,7 +44,8 @@ export const Boards = () => {
             <BiTrash size={"1.25rem"} />
           </BoardCard.IconWrapper>
           <BoardCard.IconWrapper
-            onClick={() => {
+            onClick={(e: SyntheticEvent) => {
+              e.stopPropagation();
               starHandler(board, true);
               apifetch.patch(`/boards/${board.id}`, {
                 starred: true,
@@ -57,10 +65,12 @@ export const Boards = () => {
 
   const StarredTemplate = ({ board }: any) => {
     return (
-      <BoardCard board={board}>
+      <BoardCard bgColor={board.color}>
+        <p>{board.name}</p>
         <BoardCard.Control>
           <BoardCard.IconWrapper
-            onClick={() => {
+            onClick={(e: SyntheticEvent) => {
+              e.stopPropagation();
               closeHandler(board, true);
               apifetch.patch(`/boards/${board.id}`, {
                 closed: true,
@@ -70,7 +80,8 @@ export const Boards = () => {
             <BiTrash size={"1.25rem"} />
           </BoardCard.IconWrapper>
           <BoardCard.IconWrapper
-            onClick={() => {
+            onClick={(e: SyntheticEvent) => {
+              e.stopPropagation();
               starHandler(board, false);
               apifetch.patch(`/boards/${board.id}`, {
                 starred: false,
@@ -97,19 +108,30 @@ export const Boards = () => {
     }
   };
 
+  const ListSimpleBoards = (boards: Board[]) => {
+    return (
+      <>
+        <h2>Boards</h2>
+        <ListBoards BoardCardTemplate={Template} boards={simpleBoards(boards)}>
+          <CreateBoard
+            onClick={(e: any) => {
+              console.log(e);
+            }}
+          >
+            Create Board
+          </CreateBoard>
+        </ListBoards>
+      </>
+    );
+  };
+
   return (
     <AppLayout>
       <Sidebar />
       <MainLayout title="My Boards">
         {boards && ListStarredBoards(boards)}
 
-        <h2>Boards</h2>
-        {boards && (
-          <ListBoards
-            BoardCardTemplate={Template}
-            boards={simpleBoards(boards)}
-          />
-        )}
+        {boards && ListSimpleBoards(boards)}
       </MainLayout>
     </AppLayout>
   );

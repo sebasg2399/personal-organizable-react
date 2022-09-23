@@ -15,7 +15,8 @@ export const ClosedBoards = () => {
 
   const DeletedTemplate = ({ board }: any) => {
     return (
-      <BoardCard board={board}>
+      <BoardCard bgColor={board.color}>
+        <p>{board.name}</p>
         <BoardCard.Control>
           <BoardCard.IconWrapper
             onClick={() => {
@@ -44,11 +45,13 @@ export const ClosedBoards = () => {
     <AppLayout>
       <Sidebar />
       <MainLayout title="Closed Boards">
-        {boards && (
+        {boards && deletedBoards(boards).length > 0 ? (
           <ListBoards
             BoardCardTemplate={DeletedTemplate}
             boards={deletedBoards(boards)}
           />
+        ) : (
+          <h2>No hay boards</h2>
         )}
       </MainLayout>
     </AppLayout>
