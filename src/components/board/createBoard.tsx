@@ -4,7 +4,6 @@ import { colors, typography } from "../../assets";
 import { Modal } from "../modal";
 import { BoardCard } from "./boardCard";
 import { MdOutlineClose } from "react-icons/md";
-import { triggerAsyncId } from "async_hooks";
 import { apifetch } from "../../services/apifetch";
 import { BoardsContext } from "../../context";
 const StyledCreateBoard = styled.div`
