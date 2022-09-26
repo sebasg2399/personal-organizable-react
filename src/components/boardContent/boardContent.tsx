@@ -13,7 +13,7 @@ const ListWrapper = styled.div`
 `;
 
 export const BoardContent = () => {
-  const { lists,addList, boardInfo, reorderLists, setLists } = useLists();
+  const { lists,addList, boardInfo, reorderLists } = useLists();
   const orderFn = (a: TList, b: TList) => a.pos - b.pos;
   const orderList = lists.sort(orderFn);
   const onDragEnd = (result: any) => {

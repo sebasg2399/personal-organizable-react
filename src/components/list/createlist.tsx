@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { colors } from "../../assets";
-import { ListsContext } from "../../context";
 import { AppInput } from "../board/createBoard";
 import { Button } from "../button";
 
