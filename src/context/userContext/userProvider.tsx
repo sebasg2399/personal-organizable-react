@@ -28,7 +28,7 @@ export interface User {
 
 export const UserProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
-
+  
   const setUser = (user: User) => {
     dispatch({ type: "setUser", payload: user });
   };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Navigate, Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
 import { UserContext } from "./context";
 import { Login, Register } from "./pages/";
@@ -24,7 +24,7 @@ export const UnauthorizedApp = () => {
   return(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Navigate to={ user ? "/login" : "/myboards"} />} />
+      <Route path="/" element={<Navigate to={ user ? "/myboards" : "/login"} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NoMatch />} />

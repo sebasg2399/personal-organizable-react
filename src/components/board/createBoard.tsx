@@ -17,7 +17,7 @@ const StyledCreateBoard = styled.div`
   cursor: pointer;
 `;
 
-const CreateBoardInput = styled.input`
+export const AppInput = styled.input`
   background-color: rgba(255, 255, 255, 0.5);
   outline: none;
   border: none;
@@ -26,6 +26,7 @@ const CreateBoardInput = styled.input`
   line-height: 28px;
   border-radius: 0.5rem;
   padding: 0 0.25rem;
+  width: 100%;
 `;
 
 const StyledPickColor = styled.div<any>`
@@ -141,5 +142,5 @@ export const CreateBoard = ({ children }: any) => {
     </StyledCreateBoard>
   );
 };
-CreateBoard.Input = CreateBoardInput;
+CreateBoard.Input = AppInput;
 CreateBoard.Submit = CreateBoardSubmit;

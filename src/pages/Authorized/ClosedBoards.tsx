@@ -1,21 +1,27 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { BoardCard, ListBoards, Sidebar } from "../../components/";
-import { Board, BoardsContext } from "../../context";
+import {  BoardsContext } from "../../context";
 import { BiTrash } from "react-icons/bi";
 import { AppLayout, MainLayout } from "../../layouts";
 import { apifetch } from "../../services/apifetch";
 import { HiArrowUp } from "react-icons/hi";
-
+import { useNavigate } from "react-router-dom";
+import { Board } from "../../interfaces";
 export const ClosedBoards = () => {
   const { boards, closeHandler, removeBoard } = useContext(BoardsContext);
-
+  const navigate = useNavigate();
   const deletedBoards = (boards: Board[]) => {
     return boards.filter((board) => board.closed);
   };
 
   const DeletedTemplate = ({ board }: any) => {
     return (
-      <BoardCard bgColor={board.color}>
+      <BoardCard
+        bgColor={board.color}
+        onClick={() => {
+          navigate("/board/" + board.id);
+        }}
+      >
         <p>{board.name}</p>
         <BoardCard.Control>
           <BoardCard.IconWrapper

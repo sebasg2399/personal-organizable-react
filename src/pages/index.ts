@@ -1,4 +1,4 @@
-export { Boards } from './Authorized/Boards';
+export { MyBoards } from './Authorized/MyBoards';
 export { ClosedBoards } from './Authorized/ClosedBoards';
 export { MyProfile } from './Authorized/MyProfile';
 export { Register } from './Unauthorized/Register';

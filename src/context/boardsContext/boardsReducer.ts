@@ -1,5 +1,5 @@
-import { Board, BoardState } from "./boardsProvider";
-
+import { BoardState } from "./boardsProvider";
+import { Board } from "../../interfaces";
 type boardsAction =
   | {
       type: "setBoards";

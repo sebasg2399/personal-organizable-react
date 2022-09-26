@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Board } from "../../context";
+import { Board } from "../../interfaces";
 
 type Props = {
   boards: Board[];

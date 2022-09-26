@@ -9,7 +9,6 @@ import { apifetch } from "../../services/apifetch";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../../layouts/";
 
-
 export const Login = () => {
   const { setUser } = useContext(UserContext);
   return (
@@ -18,13 +17,13 @@ export const Login = () => {
         <h2>{"{ organizable }"}</h2>
         <h1>Login</h1>
       </header>
-      
+
       <Form
         onSubmit={(inputs) => {
           apifetch
             .post("/login", inputs)
             .then(({ data }) => {
-              setUser(data);
+              setTimeout(()=>setUser(data), 300);
               sessionStorage.setItem("user", JSON.stringify(data));
               window.location.replace("/myboards");
             })

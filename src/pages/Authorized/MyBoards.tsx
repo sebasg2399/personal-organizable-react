@@ -1,17 +1,19 @@
-import { BoardCard, CreateBoard, ListBoards, Sidebar } from "../../components/";
+import { BoardCard, CreateBoard, ListBoards, Sidebar } from "../../components";
 import { AppLayout, MainLayout } from "../../layouts";
-import { SyntheticEvent, useContext, useState } from "react";
-import { Board, BoardsContext } from "../../context";
+import { SyntheticEvent, useContext } from "react";
+import { BoardsContext } from "../../context";
 import { BiTrash } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { apifetch } from "../../services/apifetch";
-
+import { useNavigate } from "react-router-dom";
+import { Board } from "../../interfaces";
 type BoardProps = {
   board: Board;
 };
 
-export const Boards = () => {
+export const MyBoards = () => {
   const { boards, starHandler, closeHandler } = useContext(BoardsContext);
+  const navigate = useNavigate();
   const simpleBoards = (boards: Board[]) => {
     const noClosed = boards.filter((board) => !board.closed);
     return noClosed.filter((board) => !board.starred);
@@ -25,8 +27,7 @@ export const Boards = () => {
     return (
       <BoardCard
         onClick={(e: SyntheticEvent) => {
-          e.stopPropagation();
-          console.log("asd");
+          navigate("/board/" + board.id);
         }}
         bgColor={board.color}
       >
@@ -65,7 +66,12 @@ export const Boards = () => {
 
   const StarredTemplate = ({ board }: any) => {
     return (
-      <BoardCard bgColor={board.color}>
+      <BoardCard
+        bgColor={board.color}
+        onClick={() => {
+          navigate("/board/" + board.id);
+        }}
+      >
         <p>{board.name}</p>
         <BoardCard.Control>
           <BoardCard.IconWrapper

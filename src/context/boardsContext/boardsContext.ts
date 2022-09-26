@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Board } from "./boardsProvider";
+import { Board } from "../../interfaces";
 
 export interface BoardContextProps {
   isLoading: boolean;

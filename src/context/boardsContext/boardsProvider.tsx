@@ -1,5 +1,7 @@
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
+import { Board } from "../../interfaces";
 import { apifetch } from "../../services/apifetch";
+import { UserContext } from "../userContext";
 import { BoardsContext } from "./boardsContext";
 import { boardsReducer } from "./boardsReducer";
 
@@ -17,16 +19,10 @@ const INITIAL_STATE: BoardState = {
   boards: [],
 };
 
-export type Board = {
-  id: number;
-  name: string;
-  closed: boolean;
-  color: string;
-  starred: boolean;
-};
 
 export const BoardsProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(boardsReducer, INITIAL_STATE);
+  const {LogOut} = useContext(UserContext)
   const setBoards = (boards: Board[]) => {
     dispatch({ type: "setBoards", payload: boards });
   };
@@ -58,7 +54,9 @@ export const BoardsProvider = ({ children }: Props) => {
   useEffect(() => {
     apifetch
       .get("/boards")
-      .then(({ data }) => setBoards(data));
+      .then(({ data }) => setBoards(data)).catch(e=>{
+        LogOut();
+      });
   }, []);
   return (
     <BoardsContext.Provider

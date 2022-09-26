@@ -59,7 +59,7 @@ const handleStyles = (props: buttonProps) => {
       background: ${background[400]};
     }
     &:focus{
-      box-shadow: 0px 0px 0px 2px #FFFFFF, 0px 0px 0px 4px ${
+      box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px ${
         background[300]
       }, 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
